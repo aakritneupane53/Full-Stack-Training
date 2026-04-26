@@ -10,17 +10,66 @@
     <div class="shop-layout">
       <header class="shop-header">Store Header</header>
       <aside class="shop-sidebar">
-        <ul>
-          <li>Filters</li>
-          <li>Categories</li>
-        </ul>
+        <div class="filters">
+          <h3>Filters</h3>
+
+          <div class="filter-group">
+            <p>Price</p>
+            <input type="range" min="0" max="5000" />
+          </div>
+
+          <div class="filter-group">
+            <p>Review</p>
+            <label><input type="checkbox" /> 5 </label>
+            <label><input type="checkbox" /> &gt;4 </label>
+            <label><input type="checkbox" /> &lt;3</label>
+          </div>
+        </div>
       </aside>
       <main class="shop-main">
         <section class="product-grid">
-          <article class="product-card">Product 1</article>
-          <article class="product-card">Product 2</article>
-          <article class="product-card">Product 3</article>
-          <article class="product-card">Product 4</article>
+          <article class="product-card">
+            <div class="product-image-container">
+              <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1527814050087-3793815479db?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8bW91c2V8ZW58MHx8MHx8fDA%3D"
+                alt="mouse"
+              />
+            </div>
+            <h3 class="product-title">Mouse</h3>
+            <p class="product-description">lorem 10</p>
+            <p class="price">₹1250</p>
+          </article>
+          <article class="product-card">
+            <div class="product-image-container">
+              <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8a2V5Ym9hcmR8ZW58MHx8MHx8fDA%3D"
+                alt="mouse"
+              />
+            </div>
+            <h3 class="product-title">Keyboard</h3>
+            <p class="product-description">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero,
+              ipsam.
+            </p>
+            <p class="price">₹2250</p>
+          </article>
+          <article class="product-card">
+            <div class="product-image-container">
+              <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1551645120-d70bfe84c826?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bW9uaXRvcnxlbnwwfHwwfHx8MA%3D%3D"
+                alt="mouse"
+              />
+            </div>
+            <h3 class="product-title">Monitor</h3>
+            <p class="product-description">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero,
+              ipsam.
+            </p>
+            <p class="price">₹23250</p>
+          </article>
         </section>
       </main>
       <footer class="shop-footer">Store Footer</footer>
