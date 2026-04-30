@@ -1,0 +1,33 @@
+.error-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+.error-container h1 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.error-container p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 16px;
+}
+
+.retry-btn {
+  padding: 8px 14px;
+  border: 1px solid #333;
+  background: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.retry-btn:hover {
+  background: #f2f2f2;
+}
