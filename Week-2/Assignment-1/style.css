@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: system-ui, Arial, sans-serif;
 }
 
 body {
@@ -15,9 +15,9 @@ body {
 
 .container {
   background: white;
-  padding: 30px;
+  padding: 4rem;
   border-radius: 10px;
-  width: 350px;
+  width: 40rem;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
@@ -41,6 +41,11 @@ input {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  transition: transform 2s ease;
+}
+
+input:hover {
+  transform: scale(1.05);
 }
 
 button {
@@ -50,20 +55,19 @@ button {
   color: white;
   border-radius: 5px;
   cursor: pointer;
+  transition: transform 2s ease;
 }
 
 button:hover {
-  background: #334155;
-}
-
-.hint {
-  font-size: 14px;
-  color: #777;
-  margin-bottom: 20px;
+  background: white;
+  color: black;
+  border: 1px solid black;
+  font-weight: bold;
+  transform: scale(1.05);
 }
 
 .card {
-  border: 1px solid #ddd;
+  border: 1px solid #dcd9d9;
   padding: 20px;
   border-radius: 10px;
   text-align: center;
@@ -74,7 +78,50 @@ button:hover {
 }
 
 .weather-icon {
-  width: 80px;
+  width: 100px;
+  height: 100px;
+  margin: 15px 0;
+  display: block;
+}
+
+.city-name {
+  font-size: 28px;
+  color: #1e293b;
+  margin-bottom: 10px;
+}
+
+.condition {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 20px;
+  text-transform: capitalize;
+}
+
+.weather-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.detail-item {
+  background: #f8f9fa;
+  padding: 12px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.detail-item i {
+  color: #1e293b;
+  font-size: 18px;
+}
+
+.detail-item strong {
+  color: #1e293b;
+  font-weight: 600;
 }
 
 .loading {
