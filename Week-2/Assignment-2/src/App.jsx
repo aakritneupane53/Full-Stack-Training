@@ -32,6 +32,7 @@ function App() {
         city:data?.name,
         humidity:data?.main?.humidity,
         pressure:data?.main?.pressure,
+        icon: data?.weather[0].icon,
       }))
 
     } catch (error) {
