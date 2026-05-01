@@ -2,11 +2,12 @@ import { useState } from 'react'
 
 
 import './App.css'
-import {Searchbar, Trending, MovieGrid, LoadingPage, ErrorPage} from './Components/exportHandler.js'
+import {Searchbar, Trending, MovieGrid, LoadingPage, ErrorPage, SearchResults} from './Components/exportHandler.js'
 import { useEffect } from 'react'
 
 function App() {
   const [search, setSearch] = useState("")
+  const [searchedResults, setSearchResults] = useState([])
   const [popularMovies, setPopularMovies] = useState([])
   const [movies, setMovies] = useState([])
   const [isLoading, setIsLoading] = useState(false)
@@ -55,15 +56,56 @@ function App() {
   fetchPopularMovieList()
   },[])
 
+
+
+    async function fetchMoviesBySearch(){
+    const url = `https://api.themoviedb.org/3/search/movie?query=${search}&language=en-US&page=1&include_adult=false`;
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${import.meta.env.VITE_TMDB_ACCESS_TOKEN}`
+      }
+    }
+    
+    setIsLoading(true)
+      try{
+        const response = await fetch(url, options);
+        if(!response.ok) throw new Error("Cannot finc the movie with the keyword")
+        const data = await response.json()
+        if(!data) throw new Error("Cannot finc the movie with the keyword")
+        console.log(data)
+      setSearchResults([...data.results])
+      }
+      catch(err){
+        console.log(err)
+        setError(err)
+      }
+      finally{
+        setIsLoading(false)
+      }
+      
+  };
+
   return (
    <>
-  <Searchbar search={search} setSeacrh={setSearch} />
+  <Searchbar
+    search={search}
+    setSearch={setSearch}
+    fetchMoviesBySearch={fetchMoviesBySearch}
+  />
 
   {isLoading ? (
     <LoadingPage />
   ) : error ? (
-    <ErrorPage message={error.message??null} />
-  ) : (
+    <ErrorPage message={error?.message || "Something went wrong"} />
+  ) 
+  : searchedResults.length>0 ? (
+    <SearchResults
+      query={search}
+      results={searchedResults || []}
+    />) 
+    : (
     <>
       <Trending popularMovies={popularMovies || []} />
       <MovieGrid movies={movies || []} />

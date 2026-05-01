@@ -1,7 +1,11 @@
 import { TextAlignJustify, Search, CircleUserRound } from 'lucide-react'
 import './searchbar.css'
 
-const Searchbar = ({search, setSearch}) => {
+const Searchbar = ({search, setSearch, fetchMoviesBySearch}) => {
+
+
+
+
   return (
     <nav className='search-bar'>
       
@@ -22,8 +26,12 @@ const Searchbar = ({search, setSearch}) => {
           className="search-input"
           value={search}
           onChange={(event) => setSearch(event.target.value)}
+          onKeyDown={(event)=>{
+            if(event.key === 'Enter')
+              fetchMoviesBySearch();
+          }}
         />
-        <Search className="search-icon" />
+        <Search className="search-icon" onClick={()=>fetchMoviesBySearch()}/>
       </section>
 
       <section className='right hidden'>
