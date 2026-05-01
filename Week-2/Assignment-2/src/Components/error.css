@@ -1,33 +1,42 @@
 .error-container {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: sans-serif;
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  color: rgb(154, 154, 154);
   text-align: center;
-  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .error-container h1 {
-  font-size: 22px;
-  margin-bottom: 10px;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: black;
 }
 
 .error-container p {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 16px;
+  font-size: 0.95rem;
+  color: #a0a0a0;
+  margin-bottom: 1.5rem;
 }
 
 .retry-btn {
-  padding: 8px 14px;
-  border: 1px solid #333;
-  background: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  border: none;
+
+  background: black;
+  color: white;
+  font-weight: 500;
+
   cursor: pointer;
-  border-radius: 4px;
+  transition: 0.2s ease;
 }
 
 .retry-btn:hover {
-  background: #f2f2f2;
+  background: white;
+  color: black;
+  border: 1px solid black;
 }

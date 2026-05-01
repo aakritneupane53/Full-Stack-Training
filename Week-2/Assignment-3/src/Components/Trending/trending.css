@@ -1,0 +1,174 @@
+.carousel-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.viewport {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.6s ease;
+}
+
+.movie-card {
+  min-width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.movie-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.movie-card__info {
+  position: absolute;
+  bottom: 80px;
+  left: 60px;
+  color: white;
+  max-width: 500px;
+}
+
+..ratings {
+  position: absolute;
+  top: 90px;
+  right: 60px;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  color: white;
+  font-size: 0.9rem;
+
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.4);
+  border: none;
+  color: white;
+  font-size: 2rem;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.left {
+  left: 10px;
+}
+
+.right {
+  right: 10px;
+}
+.movie-card__overlay {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.75) 0%,
+    rgba(0, 0, 0, 0.4) 35%,
+    rgba(0, 0, 0, 0.1) 60%,
+    rgba(0, 0, 0, 0.05) 100%
+  );
+
+  z-index: 1;
+}
+
+.movie-card {
+  min-width: 100vw;
+  height: 100vh;
+
+  background-size: cover;
+  background-position: center;
+  position: relative;
+
+  /* improves depth */
+  transform: scale(1.02);
+}
+
+.movie-card__info {
+  position: absolute;
+  bottom: 120px;
+  left: 80px;
+
+  z-index: 2;
+  max-width: 600px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  color: white;
+}
+.movie-card__info h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.movie-card__info p {
+  font-size: 1rem;
+  line-height: 1.5;
+  opacity: 0.85;
+
+  display: -webkit-box;
+  /* -webkit-line-clamp: 4; */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.ratings {
+  position: absolute;
+  top: 90px;
+  right: 60px;
+
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  color: white;
+  font-size: 0.9rem;
+
+  background: rgba(0, 0, 0, 0.3);
+  padding: 10px 12px;
+  border-radius: 10px;
+
+  backdrop-filter: blur(6px);
+}
+
+.movie-card__info {
+  animation: fadeUp 0.6s ease;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

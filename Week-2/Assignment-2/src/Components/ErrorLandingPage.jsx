@@ -2,7 +2,7 @@ import './error.css'
 
 const ErrorLandingPage = ({message, onRetry}) => {
   return (
-    <div className="error-container">
+    <div className="blur-container error-container">
       <h1>Something went wrong</h1>
       <p>{message || "Unable to load data."}</p>
 

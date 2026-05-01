@@ -47,22 +47,37 @@ function App() {
 
  return (
   <div className="root">
-    {loading ? (
-      <LoadingPage />
-    ) : error ? (
-      <ErrorLandingPage
-        message="Failed to fetch weather"
-        onRetry={handleFormSubmission}
-      />
-    ) : weather ? (
-      <WeatherCard weather={weather} />
-    ) : (
-      <SearchForm
-        setCity={setCity}
-        city={city}
-        handleFormSubmission={handleFormSubmission}
-      />
-    )}
+    <div className="container">
+      
+
+      <div className="search-section">
+        <SearchForm
+          setCity={setCity}
+          city={city}
+          handleFormSubmission={handleFormSubmission}
+        />
+      </div>
+
+
+      <div className="result-section">
+        {loading && <LoadingPage />}
+
+        {!loading && error && (
+          <ErrorLandingPage
+            message="Failed to fetch weather"
+            onRetry={()=>{
+              setError(null)
+              handleFormSubmission()
+            }}
+          />
+        )}
+
+        {!loading && !error && weather && (
+          <WeatherCard weather={weather} />
+        )}
+      </div>
+
+    </div>
   </div>
 );
 }
