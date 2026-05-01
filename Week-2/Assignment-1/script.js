@@ -1,4 +1,4 @@
-const apiKey = "4b30a6b3262f969ae2fa3bb7925ad94c";
+const apiKey = "<Random String>"
 
 const searchBtn = document.getElementById("searchBtn");
 const cityInput = document.getElementById("cityInput");
