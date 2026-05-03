@@ -39,7 +39,7 @@
   max-width: 500px;
 }
 
-..ratings {
+.ratings {
   position: absolute;
   top: 90px;
   right: 60px;

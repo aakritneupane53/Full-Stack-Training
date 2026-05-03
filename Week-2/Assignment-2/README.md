@@ -1,16 +1,55 @@
-# React + Vite
+# Weather Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern weather application built with React and Vite that allows users to search for weather information for any city.
+Build using Open Weather API
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **City Search**: Search weather information for any city worldwide
+- **Real-time Weather Data**: Displays current weather conditions including temperature, humidity, and more
+- **Loading State**: Shows a loading animation while fetching data
+- **Error Handling**: Displays user-friendly error messages when searches fail
+- **Responsive Design**: Clean and responsive UI for a better user experience
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend Framework**: React
+- **Build Tool**: Vite
+- **Styling**: CSS
+- **Linting**: ESLint
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+3. Open your browser and navigate to `http://localhost:5173`
+
+## Project Structure
+
+```
+src/
+├── App.jsx              # Main application component
+├── Components/
+│   ├── SearchForm.jsx   # Weather search input component
+│   ├── WeatherCard.jsx  # Displays weather information
+│   ├── LoadingPage.jsx  # Loading state display
+│   ├── StatusMessage.jsx # Status notifications
+│   └── ErrorLandingPage.jsx # Error display
+├── App.css              # Main styling
+└── index.css            # Global styles
+```
+
+## How to Use
+
+1. Enter a city name in the search form
+2. Click search or press Enter
+3. View the weather information for that city
+4. Handle any errors gracefully with helpful messages

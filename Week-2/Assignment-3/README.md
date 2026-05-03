@@ -1,16 +1,44 @@
-# React + Vite
+# Movie Discovery Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based movie discovery application built with Vite that allows users to search for movies and browse trending content.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Movie Search**: Search for movies by title
+- **Trending Movies**: View currently trending movies
+- **Movie Grid**: Browse movies in a responsive grid layout
+- **Genre Classification**: Movies organized by genres
+- **Loading State**: User feedback during data fetching
+- **Error Handling**: Graceful error messages and handling
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- Vite
+- CSS
+- ESLint
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+npm run dev
+```
+
+## Project Structure
+
+- `src/App.jsx` - Main application component
+- `src/Components/` - Reusable React components
+  - `MovieCard.jsx` - Individual movie display
+  - `MovieGrid.jsx` - Movie grid layout
+  - `Searchbar.jsx` - Search functionality
+  - `Trending.jsx` - Trending movies section
+  - `Loading.jsx` - Loading indicator
+  - `Error.jsx` - Error display
+- `src/assets/genres.js` - Genre data
+
+## Usage
+
+1. Launch the application
+2. Search for movies or browse trending content
+3. View movie details in the grid layout
