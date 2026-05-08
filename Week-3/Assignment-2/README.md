@@ -43,7 +43,7 @@ Used isActive callback from NavLink for active link styling.
 
 ## Hooks Used from react-router
 
-1. useNavigate() return a navigate obje which takes the path as an arg and mostly used alongside button when clicked to navigate to certain router or navigate(-1) to go to previous page
+1. useNavigate() return a navigate object which takes the path as an arg and mostly used alongside button click Event when clicked to navigate to certain route or navigate(-1) to go to previous page
 
 2. useSearchParams(): used in calendar to implement the calendar?view= month or calendar?type= week to implement two distict view based on query parameter
 const [searchParams, setSearchParams] = useSearchParams();
@@ -59,7 +59,7 @@ setSearchParams to toggle between month and week view values
  # Screen Shots Attached in the folder
 https://github.com/aakritneupane53/Full-Stack-Training/tree/main/Week-3/Assignment-2%20Screenshots
 
- # Appologies for using tailwind, had to use it due to time restrictions.
+ ## Appologies for using tailwind, had to use it due to time restrictions.
 
 
 ```txt
