@@ -1,12 +1,15 @@
 import { Dashboard, Footer, Header, SideBar } from '../Pages/export'
+import '../App.css'
 
 const AppShell = () => {
   return (
-    <div className='min-h-screen grid grid-cols-7 grid-rows-[auto_1fr_auto] gap-2'>
+    <div className='app-shell h-screen w-screen flex flex-col md:flex-row'>
       <SideBar />
-      <Header />
-      <Dashboard />
-      <Footer />
+      <div className='flex-1 flex flex-col md:ml-0'>
+        <Header />
+        <Dashboard />
+        <Footer />
+      </div>
     </div>
   )
 }

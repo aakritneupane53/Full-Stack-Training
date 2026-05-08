@@ -1,6 +1,6 @@
 const SideBar = () => {
   return (
-    <aside className='sidebar col-start-1 col-end-3 row-span-full'>
+    <aside className='hidden md:flex md:flex-col h-full w-[20%] border-r border-gray-500 bg-white'>
       SideBar
     </aside>
   )
