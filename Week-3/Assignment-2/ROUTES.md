@@ -1,5 +1,6 @@
 # Routes
 
+
 ## Main Routes
 
 | Route | Page (.tsx) |
@@ -57,6 +58,8 @@ setSearchParams to toggle between month and week view values
 
  # Screen Shots Attached in the folder
  https://github.com/aakritneupane53/Full-Stack-Training/tree/week-3/Week-3/Assignment-2%20Screenshots
+
+ # Appologies for using tailwind, had to use it due to time restrictions.
 
 
 ```txt
