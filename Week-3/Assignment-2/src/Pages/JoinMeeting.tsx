@@ -1,6 +1,6 @@
-import { FaUsers, FaUserShield, FaCalendar, FaClock } from "react-icons/fa";
+import {useNavigate} from 'react-router'
+import { FaCalendar, FaClock } from "react-icons/fa";
 import { SiGooglemeet } from "react-icons/si";
-import {NavLink, useNavigate} from 'react-router'
 
 
 type Meetings = [{
@@ -20,34 +20,12 @@ type Props = {
   meetings:Meetings
 }
 
-const Dashboard = ({meetings}:Props) => {
-
-  const navigator = useNavigate()
-
-  const quickActions = [{id:1, name:"Start Meeting", icon:<FaUsers />,path:'/new-meeting'}, {id:2, name:"Join Meeting", icon:<FaUserShield />,path:'/join-meeting'}, {id:3, name:"Schedule Meeting", icon:<FaCalendar/>,path:"/schedule-meeting"}]
-
-
+const JoinMeeting = ({meetings}:Props) => {
+  const navigate = useNavigate()
 
   return (
-    <div className="w-full h-full flex flex-col px-10 py-4">
-      <div>
-        <p className="text-2xl font-bold text-gray-500">Good Morning, Aakrit Neupane</p>
-        <p className="text-gray-300">Here's what's happening with your meeting today.</p>
-      </div>
-
-      <div className="w-full h-auto flex flex-col md:flex-row justify-evenly gap-4 mt-4 transition-transform ">
-        {quickActions.map((action)=>{
-          return <div key={action.id} className="flex flex-col justify-center items-center gap-2 border border-gray-300 px-16 py-2 rounded-xl flex-wrap hover:scale-[1.2] ">
-
-              <span className="bg-indigo-600 p-1.5 rounded-xl text-gray-200">{action.icon}</span> 
-              <span className="font-bold text-xl text-gray-500">{action.name}</span>
-              <button><NavLink to={action.path}>{`${action.name} now`}</NavLink></button>
-
-          </div>
-        })}
-      </div>
-
-      <div className="mt-8">
+    <div>
+        <div className="mt-8 ml-10">
         <h3 className="text-xl font-bold text-gray-700 mb-4">Upcoming Meetings</h3>
         {meetings && meetings.length > 0?(
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -88,7 +66,7 @@ const Dashboard = ({meetings}:Props) => {
                   </div>
                 </div>
 
-                <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors" onClick = {()=>navigator(`/meeting/${meeting.id}`)}>
+                <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors " onClick={()=>navigate(`/meeting/${meeting.id}`)}>
                   Join Meeting
                 </button>
               </div>
@@ -101,8 +79,9 @@ const Dashboard = ({meetings}:Props) => {
         </div>)}
       </div>
 
+
     </div>
   )
 }
 
-export default Dashboard
+export default JoinMeeting
