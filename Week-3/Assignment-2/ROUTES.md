@@ -53,6 +53,12 @@ setSearchParams to toggle between month and week view values
  Used to fetch the route parameters in the meetings/:meetingId page and also rendering the meetings/:meetingId/details and meetings/:meetingId/participants, Used to find the meeting from meetings array
 
 
+
+
+ # Screen Shots Attached in the folder
+ https://github.com/aakritneupane53/Full-Stack-Training/tree/week-3/Week-3/Assignment-2%20Screenshots
+
+
 ```txt
 
 

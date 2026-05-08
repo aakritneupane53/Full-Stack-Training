@@ -46,18 +46,18 @@ function App() {
      <Routes>
         <Route path="/" element={ <AppShell day={date.toLocaleDateString('en-US', { weekday: 'long' })} date={date.toDateString()}  time={date.toLocaleTimeString()} />
      }>
-      <Route index element={<Dashboard meetings={meetings}/>}/>
-      <Route path='/dashboard' element={<Dashboard meetings={meetings}/>}/>
-      <Route path='/new-meeting' element={<NewMeeting meetings={meetings} setMeetings={setMeetings}/>}/>
-      <Route path='/join-meeting' element={<JoinMeeting meetings={meetings}/>}/>
-      <Route path='/meeting/:meetingId' >
-        <Route index element={<MeetingDetails meetings={meetings}/>} />
-        <Route path='details' element={<MeetingDetails meetings={meetings}/>} />
-        <Route path='participants' element={<MeetingParticipants meetings={meetings}/>} />
-      </Route>
-      <Route path='/calendar' element={<Calendar/>}/>
-      <Route path='/schedule-meeting' element={<ScheduleMeeting/>}/>
-      <Route path='/profile-settings' element={<ProfileSetting/>}/>
+          <Route index element={<Dashboard meetings={meetings}/>}/>
+          <Route path='/dashboard' element={<Dashboard meetings={meetings}/>}/>
+          <Route path='/new-meeting' element={<NewMeeting meetings={meetings} setMeetings={setMeetings}/>}/>
+          <Route path='/join-meeting' element={<JoinMeeting meetings={meetings}/>}/>
+          <Route path='/meeting/:meetingId' >
+            <Route index element={<MeetingDetails meetings={meetings}/>} />
+            <Route path='details' element={<MeetingDetails meetings={meetings}/>} />
+            <Route path='participants' element={<MeetingParticipants meetings={meetings}/>} />
+          </Route>
+          <Route path='/calendar' element={<Calendar/>}/>
+          <Route path='/schedule-meeting' element={<ScheduleMeeting/>}/>
+          <Route path='/profile-settings' element={<ProfileSetting/>}/>
      </Route>
      <Route path='*' element={<NotFound/>} />
 

@@ -1,0 +1,56 @@
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e1e2f 0%, #121212 100%);
+  font-family: "Inter", system-ui, sans-serif;
+  color: white;
+}
+
+.clock-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+}
+
+.clock-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  text-align: center;
+  min-width: 300px;
+}
+
+h1 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  color: #888;
+  margin-bottom: 1rem;
+}
+
+.time-display {
+  font-size: 4rem;
+  font-weight: 700;
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.date-display {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: #aaa;
+}
