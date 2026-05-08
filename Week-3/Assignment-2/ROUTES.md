@@ -31,23 +31,17 @@ Example:
 | `/calendar/?view=month` | Calendar |
 | `/calendar/?view=week`  | Calendar |
 
-
-
-```txt
-/meeting/123
-
 ## Special Routes
 
 | Route | Component |
 |-------|------------|
 | `*` | Not Found |
 
-## Special Routes
-Used useNavigate() hook for redirection and navigation.
 Used NavLink in sidebar navigation.
 Used isActive callback from NavLink for active link styling.
 
 ## Hooks Used from react-router
+
 1. useNavigate() return a navigate obje which takes the path as an arg and mostly used alongside button when clicked to navigate to certain router or navigate(-1) to go to previous page
 
 2. useSearchParams(): used in calendar to implement the calendar?view= month or calendar?type= week to implement two distict view based on query parameter
@@ -57,4 +51,13 @@ setSearchParams to toggle between month and week view values
 
 3. useParams():
  Used to fetch the route parameters in the meetings/:meetingId page and also rendering the meetings/:meetingId/details and meetings/:meetingId/participants, Used to find the meeting from meetings array
+
+
+```txt
+
+
+
+
+
+
 
