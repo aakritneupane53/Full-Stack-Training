@@ -3,11 +3,23 @@ import { Document } from "mongoose";
 
 import { ToDoT } from "../model/todo.model";
 
-import { postToDo, fetchToDo } from "../services/todo.services";
+import { postToDo, fetchToDo, fetchToDoById } from "../services/todo.services";
 
 export async function fetchToDos(_req: Request, res: Response) {
   try {
     const result: Document<ToDoT> = await fetchToDo();
+    return res.status(200).json({ success: true, data: result });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: error.message });
+  }
+}
+
+export async function fetchToDoByID(req: Request, res: Response) {
+  try {
+    //  const result: Document<ToDoT> = await fetchToDo();
+    const { id } = req.params as { id: string };
+    const result = await fetchToDoById(id);
     return res.status(200).json({ success: true, data: result });
   } catch (error) {
     console.log(error);

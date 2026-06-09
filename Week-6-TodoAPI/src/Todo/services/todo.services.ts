@@ -1,6 +1,7 @@
 import { setCache, getCache, invalidateCache } from "../../cache/cache.service";
+import redis from "../../config/redis";
 import { ToDo, ToDoT } from "../model/todo.model";
-import { Document } from "mongoose";
+import mongoose, { Document } from "mongoose";
 
 export async function fetchToDo() {
   try {
@@ -10,6 +11,20 @@ export async function fetchToDo() {
     const result: Document<ToDoT> = await ToDo.find();
     if (!result) throw new Error("Errror fetching the todos from the db");
     await setCache("todos", result, TTL);
+    return result;
+  } catch (error) {
+    return Promise.reject(error.message as string);
+  }
+}
+
+export async function fetchToDoById(id: string) {
+  try {
+    const objId = new mongoose.Types.ObjectId(id);
+    const cachedResult = await getCache(`todo:${id}`);
+    if (cachedResult) return cachedResult;
+    const result = await ToDo.findOne({ _id: objId });
+    if (!result) throw new Error("The todo with the provided id doesn't exist");
+    await setCache(`todo:${id}`, result, 300);
     return result;
   } catch (error) {
     return Promise.reject(error.message as string);
