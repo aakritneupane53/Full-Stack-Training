@@ -3,7 +3,12 @@ import { Document } from "mongoose";
 
 import { ToDoT } from "../model/todo.model";
 
-import { postToDo, fetchToDo, fetchToDoById } from "../services/todo.services";
+import {
+  postToDo,
+  fetchToDo,
+  fetchToDoById,
+  deleteToDo,
+} from "../services/todo.services";
 
 export async function fetchToDos(_req: Request, res: Response) {
   try {
@@ -34,6 +39,19 @@ export async function postToDos(req: Request, res: Response) {
     return res
       .status(201)
       .json({ message: "Sucessfully cerated", data: result });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: error.message });
+  }
+}
+
+export async function deleteToDoById(req: Request, res: Response) {
+  try {
+    const { id } = req.params as { id: string };
+    const result = await deleteToDo(id);
+    return res
+      .status(201)
+      .json({ message: "Sucessfully deleted", data: result });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: error.message });

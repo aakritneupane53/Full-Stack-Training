@@ -48,3 +48,19 @@ export async function postToDo(
     return Promise.reject(error.message as string);
   }
 }
+
+export async function deleteToDo(id: string) {
+  try {
+    const objId = new mongoose.Types.ObjectId(id);
+
+    //invalidate the cache
+    await invalidateCache("todos");
+    await invalidateCache(`todo:${id}`);
+
+    const result = await ToDo.deleteOne({ _id: objId });
+
+    return result;
+  } catch (error) {
+    return Promise.reject(error.message as string);
+  }
+}

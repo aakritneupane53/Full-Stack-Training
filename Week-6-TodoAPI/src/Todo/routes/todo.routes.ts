@@ -9,6 +9,7 @@ import {
   fetchToDos,
   postToDos,
   fetchToDoByID,
+  deleteToDoById,
 } from "../controller/todo.controller";
 
 const router = express.Router();
@@ -17,5 +18,6 @@ router.post("/todos", validate(createToDoSchema), authorize, postToDos);
 
 router.get("/todos", authorize, fetchToDos);
 router.get("/todos/:id", fetchToDoByID);
+router.delete("/todos/:id", deleteToDoById);
 
 export default router;
