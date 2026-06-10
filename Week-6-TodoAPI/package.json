@@ -9,8 +9,8 @@
     "@types/jsonwebtoken": "^9.0.10"
   },
   "scripts": {
-    "start": "bun  src/index.ts",
-    "dev": "bun --watch src/index.ts",
+    "start": "bun  src/server.ts",
+    "dev": "bun --watch src/server.ts",
     "typecheck": "tsc --noEmit",
     "test": "bun test"
   },

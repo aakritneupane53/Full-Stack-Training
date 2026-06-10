@@ -15,12 +15,4 @@ app.use(todoRoutes);
 app.get("/", (_req, res) => res.json({ message: "Hello from todo api" }));
 app.get("/health", (_req, res) => res.json({ message: "Okay" }));
 
-app.listen(3001, async () => {
-  try {
-    await connectDB();
-    console.log(`server conected at http://localhost:${3001}`);
-  } catch (error) {
-    console.log(error.message);
-    process.exit(1);
-  }
-});
+export default app;
