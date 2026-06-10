@@ -1,6 +1,5 @@
 import express from "express";
 
-import connectDB from "./config/db";
 import authRoutes from "./auth/auth.routes";
 import todoRoutes from "./Todo/routes/todo.routes";
 
