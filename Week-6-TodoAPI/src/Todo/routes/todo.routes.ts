@@ -11,6 +11,7 @@ import {
   fetchToDoByID,
   deleteToDoById,
   updateToDoById,
+  updateToDoByIdPatch,
 } from "../controller/todo.controller";
 
 const router = express.Router();
@@ -21,5 +22,6 @@ router.get("/todos", fetchToDos);
 router.get("/todos/:id", fetchToDoByID);
 router.delete("/todos/:id", deleteToDoById);
 router.put("/todos/:id", updateToDoById);
+router.patch("/todos/:id", updateToDoByIdPatch);
 
 export default router;
