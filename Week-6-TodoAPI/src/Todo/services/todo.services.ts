@@ -49,6 +49,26 @@ export async function postToDo(
   }
 }
 
+export async function updateToDo(
+  id: string,
+  data: { title: string; completed: boolean; description: string },
+) {
+  try {
+    const objId = new mongoose.Types.ObjectId(id);
+    const update = await ToDo.findByIdAndUpdate(objId, { ...data });
+    if (!update)
+      throw new Error("Something went wron while updating in the db");
+
+    // invalidate cache
+    await invalidateCache("todos");
+    await invalidateCache(`todo:${id}`);
+    return update;
+  } catch (error) {
+    console.log(error);
+    return Promise.reject(error.message);
+  }
+}
+
 export async function deleteToDo(id: string) {
   try {
     const objId = new mongoose.Types.ObjectId(id);

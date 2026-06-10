@@ -20,6 +20,7 @@ app.listen(3001, async () => {
     await connectDB();
     console.log(`server conected at http://localhost:${3001}`);
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
+    process.exit(1);
   }
 });

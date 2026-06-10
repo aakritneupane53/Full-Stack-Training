@@ -8,6 +8,7 @@ import {
   fetchToDo,
   fetchToDoById,
   deleteToDo,
+  updateToDo,
 } from "../services/todo.services";
 
 export async function fetchToDos(_req: Request, res: Response) {
@@ -52,6 +53,33 @@ export async function deleteToDoById(req: Request, res: Response) {
     return res
       .status(201)
       .json({ message: "Sucessfully deleted", data: result });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: error.message });
+  }
+}
+
+export async function updateToDoById(req: Request, res: Response) {
+  try {
+    const { id } = req.params as { id: string };
+    if (!id) return res.status(401).json({ message: "No id provided" });
+    const { title, completed, description } = req.body as {
+      title: string;
+      completed: boolean;
+      description: string;
+    };
+    const updateResult = await updateToDo(id, {
+      title,
+      completed,
+      description,
+    });
+    if (!updateResult)
+      return res
+        .status(500)
+        .json({ message: "Something went wrong while writing into the db" });
+    return res
+      .status(201)
+      .json({ message: "successfully updated", data: updateResult });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: error.message });
