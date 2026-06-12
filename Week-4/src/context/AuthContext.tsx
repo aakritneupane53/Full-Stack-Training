@@ -8,8 +8,10 @@ type User = {
 
 type AuthContext = {
     user:User|null,
-    login:(credentials:{email:string, password:string})=>Promise<void> // just sets the access token to the localStorage
-    logout: ()=>Promise<void>
+    login:(credentials:{email:string, password:string})=>Promise<void>, // just sets the access token to the localStorage
+    logout: ()=>Promise<void>,
+    isAuthenticated:boolean,
+    isLoading:boolean
 }
 
-export const authContext = createContext<AuthContext|null>(null)
+export const AuthContext = createContext<AuthContext|null>(null)

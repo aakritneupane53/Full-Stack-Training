@@ -6,7 +6,7 @@ export async function loginService(credentials: {
   // const res = await api.post('/api/auth/login')
   // if res.ok return res.data
 
-  Promise.resolve((resolve) => {
+  await Promise.resolve((resolve) => {
     return setTimeout(resolve, 1000);
   });
 
@@ -23,9 +23,23 @@ export async function logoutService() {
   // const res = await api.post('/api/auth/login')
   // if res.ok return res.data
 
-  Promise.resolve((resolve) => {
+  await Promise.resolve((resolve) => {
     return setTimeout(resolve, 1000);
   });
 
+  console.log(`User succesfully logged out`);
+
   return;
+}
+
+export async function getUser(accessToken: string) {
+  await Promise.resolve((resolve) => {
+    return setTimeout(resolve, 1000);
+  });
+
+  if (accessToken)
+    return {
+      name: "Fake user",
+      email: "fakeuser@fake.com",
+    };
 }
