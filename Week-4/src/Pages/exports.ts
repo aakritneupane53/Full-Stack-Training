@@ -8,6 +8,7 @@ import Meeting from "./Meeting";
 import MeetingDetails from "./MeetingDetails";
 import MeetingParticipants from "./MeetingParticipants";
 import NotFound from "./NotFound";
+import Login from "./Login";
 
 export {
   Calendar,
@@ -20,4 +21,5 @@ export {
   MeetingDetails,
   MeetingParticipants,
   NotFound,
+  Login,
 };
