@@ -22,12 +22,12 @@ interface MeetingStore {
 
 }
 
-export const useMeetingStore = create<MeetingStore>((set,get)=>({
+export const useMeetingStore = create<MeetingStore>((set, get)=>({
     meetings:localStorage.getItem('meetings')?JSON.parse(localStorage.getItem('meetings')):[],
     addMeeting:(newMeeting:meeting)=>{
         return set((state)=>{
             const oldMeetings = get().meetings
-            localStorage.setItem('meetings', JSON.parse([...oldMeetings,newMeeting]))
+            localStorage.setItem('meetings', JSON.stringify([...oldMeetings,newMeeting]))
             return ({meetings:[...state.meetings,newMeeting]})
         })
     },

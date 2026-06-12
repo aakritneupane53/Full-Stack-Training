@@ -3,6 +3,8 @@ import { SiGooglemeet } from "react-icons/si";
 import {NavLink, useNavigate} from 'react-router'
 
 
+import {useMeetingStore} from '../store/useMeetings'
+
 type Meetings = [{
   id:string|number,
   title:string,
@@ -22,6 +24,7 @@ type Props = {
 
 const Dashboard = ({meetings}:Props) => {
 
+  const {clearMeeting} = useMeetingStore()
   const navigator = useNavigate()
 
   const quickActions = [{id:1, name:"Start Meeting", icon:<FaUsers />,path:'/new-meeting'}, {id:2, name:"Join Meeting", icon:<FaUserShield />,path:'/join-meeting'}, {id:3, name:"Schedule Meeting", icon:<FaCalendar/>,path:"/schedule-meeting"}]
@@ -48,6 +51,9 @@ const Dashboard = ({meetings}:Props) => {
       </div>
 
       <div className="mt-8">
+        <div>
+          <button className="w-40 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors" onClick={()=>clearMeeting()}  >ClearMeeting</button>
+        </div>
         <h3 className="text-xl font-bold text-gray-700 mb-4">Upcoming Meetings</h3>
         {meetings && meetings.length > 0?(
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

@@ -20,7 +20,7 @@ type meetings = [{
 }]
 
 function App() {
-  const {meetings,updateMeeting} = useMeetingStore()
+  const {meetings} = useMeetingStore()
   const [date, setDate] = useState<Date>(new Date())
  
 

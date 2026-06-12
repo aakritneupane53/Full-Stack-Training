@@ -3,6 +3,9 @@ import { FaCalendar, FaClock } from "react-icons/fa";
 import { SiGooglemeet } from "react-icons/si";
 
 
+import {useMeetingStore} from '../store/useMeetings'
+
+
 type Meetings = [{
   id:string|number,
   title:string,
@@ -22,6 +25,8 @@ type Props = {
 
 const JoinMeeting = ({meetings}:Props) => {
   const navigate = useNavigate()
+
+  const {removeMeeting}  = useMeetingStore()
 
   return (
     <div>
@@ -66,9 +71,14 @@ const JoinMeeting = ({meetings}:Props) => {
                   </div>
                 </div>
 
-                <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors " onClick={()=>navigate(`/meeting/${meeting.id}`)}>
-                  Join Meeting
-                </button>
+                <div className='w-full flex space-between'>
+                  <button className="w-full mr-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors " onClick={()=>navigate(`/meeting/${meeting.id}`)}>
+                    Join Meeting
+                  </button>
+                  <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors " onClick={()=>removeMeeting(`${meeting.id}`)}>
+                    DeleteMeeting
+                  </button>
+                </div>
               </div>
             )
           })}
