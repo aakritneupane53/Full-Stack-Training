@@ -1,4 +1,4 @@
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router';
 import useAuth  from '../hooks/useAuth';
 import type React from 'react';
 
@@ -22,3 +22,5 @@ export const ProtectedRoute = ({ children }:{chilren:React.ReactNode}) => {
 
   return children;
 };
+
+export default ProtectedRoute

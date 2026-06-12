@@ -35,16 +35,22 @@ const AuthProvider = ({children}:Children) => {
         async function fetchUser(){
             setIsLoading(true)
             let accessToken = localStorage.getItem('accessToken');
+            console.log('No access token found')
             if(accessToken){
+                console.log('Access Token found', accessToken)
                 const userI = await getUser(accessToken)
+                console.log('Fetched user', userI)
                 setuser({...userI} as User)
-                console.log(userI)
+
                 setIsLoading(false)
                 return
             }
+            console.log('No access token found')
+            console.log('fetching access Token')
             accessToken = await loginService({email:"random@rand.com", password:"randomrand"})
+            console.log('fetched accesstoken', accessToken)
             const userI = await getUser(accessToken)
-            console.log(userI)
+            console.log('Fetched user', userI)
             setuser({...userI} as User)
             setIsLoading(false)
         }
