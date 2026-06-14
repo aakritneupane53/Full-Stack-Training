@@ -56,3 +56,15 @@ export async function loginHandler(
     next(error);
   }
 }
+
+export function logoutHandler(req: Request, res: Response, next: NextFunction) {
+  try {
+    res.clearCookie("refreshToken");
+    return res
+      .status(200)
+      .json({ success: true, message: "Logout successful" });
+  } catch (error) {
+    console.log(`Error in logout handler\n`, error.message);
+    next(error);
+  }
+}
