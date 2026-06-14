@@ -15,4 +15,9 @@ export async function loginService({
   password,
 }: Login): Promise<string> {
   // check if the user exists in db=> match password => generate access and refreshToken return access token, set refreshToken to the http only cookie
+  const user = await fetchUserByEmail(email.trim());
+  if (!user)
+    throw new AppError("User with the given email does not exist", 400);
+
+  // match the password
 }

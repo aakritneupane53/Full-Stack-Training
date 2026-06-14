@@ -9,13 +9,7 @@ type User = {
 };
 
 export async function fetchUserByEmail(email: string) {
-  const user = await User.findOne({ email: email }).select({
-    _id: 1,
-    name: 1,
-    email: 1,
-    role: 1,
-  });
-
+  const user = await User.findOne({ email: email });
   return user;
 }
 
