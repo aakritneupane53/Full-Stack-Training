@@ -1,4 +1,5 @@
 import express, { Request, Response, NextFunction } from "express";
+import cookieParser from "cookie-parser";
 
 import redis from "./config/redis";
 import errorHandler from "./middleware/error.middleware";
@@ -8,6 +9,7 @@ import { AppError } from "./utils/AppError";
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
 

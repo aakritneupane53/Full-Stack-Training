@@ -2,9 +2,9 @@ import "dotenv/config";
 import jwt from "jsonwebtoken";
 
 type Payload = {
-  id: string;
-  name: string;
-  email: string;
+  id?: string;
+  name?: string;
+  email?: string;
   role: "admin" | "user";
 };
 export function encodeToken(payload: Payload, secret: string): string {

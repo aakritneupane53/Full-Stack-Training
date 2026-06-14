@@ -1,10 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 
-import {
-  writeUserToDb,
-  fetchUserByEmail,
-} from "../../user/services/user.services";
 import { AppError } from "../../utils/AppError";
+import { loginService } from "../services/auth.services";
+import { writeUserToDb } from "../../user/services/user.services";
+import { success } from "zod";
 
 export async function registerHandler(
   req: Request,
@@ -25,8 +24,35 @@ export async function registerHandler(
   }
 }
 
-export async function login(req: Request, res: Response, next: NextFunction) {
+export async function loginHandler(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   try {
-    const { name, email } = req.body;
-  } catch (error) {}
+    const { email, password } = req.body;
+    const { accessToken, refreshToken } = await loginService({
+      email,
+      password,
+    });
+    if (!accessToken || !refreshToken)
+      throw new AppError("Internal Server Error", 500);
+
+    // set refresh token to the http only cookie
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "lax",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "user succesfully logged in",
+      accessToken,
+    });
+  } catch (error) {
+    console.log(`Error in login handler\n`, error.message);
+    next(error);
+  }
 }
