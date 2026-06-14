@@ -1,6 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 
-import { writeUserToDb, fetchUserByEmail } from "../services/auth.services";
+import {
+  writeUserToDb,
+  fetchUserByEmail,
+} from "../../user/services/user.services";
 import { AppError } from "../../utils/AppError";
 
 export async function registerHandler(
@@ -20,4 +23,10 @@ export async function registerHandler(
     console.log(`Error in register handler\n`, (error as AppError)?.message);
     next(error);
   }
+}
+
+export async function login(req: Request, res: Response, next: NextFunction) {
+  try {
+    const { name, email } = req.body;
+  } catch (error) {}
 }

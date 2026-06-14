@@ -1,5 +1,6 @@
-import User from "../model/user.model";
-
+import { AppError } from "../../utils/AppError";
+import User from "../../user/model/user.model";
+import { hashPassword } from "../../utils/hash";
 type User = {
   name: string;
   email: string;
@@ -7,24 +8,31 @@ type User = {
   role?: "admin" | "user";
 };
 
-export async function writeUserToDb({ name, email, password, role }: User) {
-  const newUser = await User.create({
-    name,
-    email,
-    password,
-    role,
-  });
-  return newUser;
-}
-
 export async function fetchUserByEmail(email: string) {
-  const user = await User.find({ email: email }).select({
+  const user = await User.findOne({ email: email }).select({
     _id: 1,
     name: 1,
     email: 1,
     role: 1,
-    password: 0,
   });
 
   return user;
+}
+
+export async function writeUserToDb({ name, email, password, role }: User) {
+  // check if the user with the given email exists
+  const user = await fetchUserByEmail(email);
+  if (user) throw new AppError("User with the given email already exist", 400);
+  const hashedPassowrd = await hashPassword(password);
+
+  const newUser = await User.create({
+    name,
+    email: email.trim().toLowerCase(),
+    password: hashedPassowrd,
+    role,
+  });
+
+  const newUserObj = newUser.toObject();
+  delete newUserObj.password;
+  return newUserObj;
 }
