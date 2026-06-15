@@ -28,7 +28,7 @@ export default function authorize(
     req.user = payload;
     next();
   } catch (error) {
-    console.log(error);
+    console.log("error in authorize middleware", error.message);
     next(error);
   }
 }

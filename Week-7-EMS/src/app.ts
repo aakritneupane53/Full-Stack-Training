@@ -4,7 +4,10 @@ import cookieParser from "cookie-parser";
 import redis from "./config/redis";
 import errorHandler from "./middleware/error.middleware";
 import authRoutes from "./auth/routes/auth.routes";
+import adminRoutes from "./admin/routes/admin.routes";
 import { AppError } from "./utils/AppError";
+import authorize from "./middleware/authorize.middleware";
+import RoleAuthorize from "./middleware/roleaccess.middleware";
 
 const app = express();
 app.use(express.json());
@@ -12,6 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/admin", authorize, RoleAuthorize("admin"), adminRoutes);
 
 app.get("/health", (_req: Request, res: Response) => {
   return res.status(200).json({ message: "Server is running just fine" });

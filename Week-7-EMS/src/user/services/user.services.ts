@@ -39,3 +39,13 @@ export async function writeUserToDb({ name, email, password, role }: User) {
   delete newUserObj.password;
   return newUserObj;
 }
+
+export async function fetchAllUser() {
+  const users = await User.find({}).select({
+    _id: 1,
+    name: 1,
+    email: 1,
+    role: 1,
+  });
+  return users;
+}
