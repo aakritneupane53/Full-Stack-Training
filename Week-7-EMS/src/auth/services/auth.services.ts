@@ -3,6 +3,7 @@ import { AppError } from "../../utils/AppError";
 import { comparePassword } from "../../utils/hash";
 import { fetchUserByEmail } from "../../user/services/user.services";
 import { encodeToken, decodeToken } from "../../utils/tokens";
+import { redis } from "../../config/redis";
 type Login = {
   email: string;
   password: string;
@@ -28,6 +29,7 @@ export async function loginService({
   const refreshToken = encodeToken(
     { id: user._id.toString(), role: user.role },
     process.env.JWT_REFRESH_SECRET as string,
+    "7d",
   );
 
   const accessToken = encodeToken(
@@ -38,6 +40,7 @@ export async function loginService({
       role: user.role,
     },
     process.env.JWT_ACCESS_SECRET as string,
+    "15m",
   );
 
   return { accessToken, refreshToken };
