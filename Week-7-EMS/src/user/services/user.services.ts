@@ -1,6 +1,7 @@
 import { AppError } from "../../utils/AppError";
 import User from "../../user/model/user.model";
 import { hashPassword } from "../../utils/hash";
+import redis from "../../config/redis";
 type User = {
   name: string;
   email: string;
@@ -14,7 +15,10 @@ export async function fetchUserByEmail(email: string) {
 }
 
 export async function fetchUserById(id: string) {
-  const user = await User.findOne({ _id: id });
+  let user = await redis.get(`user:${id}`);
+  if (user) return JSON.parse(user);
+  user = await User.findOne({ _id: id });
+
   return user;
 }
 

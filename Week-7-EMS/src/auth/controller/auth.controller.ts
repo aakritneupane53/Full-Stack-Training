@@ -2,8 +2,10 @@ import { Request, Response, NextFunction } from "express";
 
 import { AppError } from "../../utils/AppError";
 import { loginService } from "../services/auth.services";
-import { writeUserToDb } from "../../user/services/user.services";
-import { success } from "zod";
+import {
+  writeUserToDb,
+  fetchUserById,
+} from "../../user/services/user.services";
 
 export async function registerHandler(
   req: Request,
@@ -65,6 +67,24 @@ export function logoutHandler(req: Request, res: Response, next: NextFunction) {
       .json({ success: true, message: "Logout successful" });
   } catch (error) {
     console.log(`Error in logout handler\n`, error.message);
+    next(error);
+  }
+}
+
+export async function fetchClient(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  try {
+    const { id } = req.user as { id: string };
+    const user = await fetchUserById(id);
+    if (!user) throw new AppError("User not found", 404);
+    const userObj = user.toObject();
+    delete userObj["password"];
+
+    return res.status(200).json({ success: true, data: userObj });
+  } catch (error) {
     next(error);
   }
 }
