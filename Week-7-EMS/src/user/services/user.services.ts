@@ -13,6 +13,11 @@ export async function fetchUserByEmail(email: string) {
   return user;
 }
 
+export async function fetchUserById(id: string) {
+  const user = await User.findOne({ _id: id });
+  return user;
+}
+
 export async function writeUserToDb({ name, email, password, role }: User) {
   // check if the user with the given email exists
   const user = await fetchUserByEmail(email);
