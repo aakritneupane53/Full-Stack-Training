@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { AppError } from "../../utils/AppError";
 import { Event } from "../model/event.model";
 import { eventSchema, eventDto } from "../schema/event.schema";
@@ -11,8 +12,8 @@ export async function fetchDraftEvent(id: string) {
   return event;
 }
 export async function fetchDraftEvents() {
-  const event = await Event.find({ status: "draft" });
-  return event;
+  const events = await Event.find({ status: "draft" });
+  return events;
 }
 
 export async function fetchAllEvents() {

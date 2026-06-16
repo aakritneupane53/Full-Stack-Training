@@ -18,9 +18,6 @@ import RoleAuthorize from "../../middleware/roleaccess.middleware";
 
 const router = express.Router();
 
-router.get("/", fetchPublishedEventsHandler);
-router.get("/:id", fetchPublishedEventHandler);
-
 router.get(
   "/draft",
   authorize,
@@ -62,5 +59,7 @@ router.patch(
   publishEventHandler,
 );
 // router.get("/", fetc);
+router.get("/", fetchPublishedEventsHandler);
+router.get("/:id", fetchPublishedEventHandler);
 
 export default router;

@@ -72,7 +72,8 @@ export async function fetchDraftEventsHandler(
 ) {
   try {
     const events = await fetchDraftEvents();
-    if (!events) throw new AppError("Invalid event id", 400, events);
+    console.log(events);
+    if (!events) throw new AppError("Something went wrong", 500, events);
     return res.status(200).json({ success: true, data: events });
   } catch (error) {
     console.log(`Error in fetchDraftEventsHandler ${error}`);
