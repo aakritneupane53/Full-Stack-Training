@@ -46,14 +46,14 @@ router.put(
 );
 router.delete(
   "/:id",
-  validate(eventSchema),
+
   authorize,
   RoleAuthorize("admin"),
   deleteEventHandler,
 );
 router.patch(
   "/:id/publish",
-  validate(eventSchema),
+
   authorize,
   RoleAuthorize("admin"),
   publishEventHandler,
