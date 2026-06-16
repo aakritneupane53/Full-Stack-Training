@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from "express";
 
 import { fetchAllUser } from "../../user/services/user.services";
 import { AppError } from "../../utils/AppError";
-import { success } from "zod";
 
 export async function fetchUsersHandlers(
   req: Request,

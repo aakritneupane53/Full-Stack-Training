@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import { required } from "zod/mini";
+import mongoose, { InferSchemaType } from "mongoose";
+import { optional } from "zod";
 
 const eventSchema = new mongoose.Schema(
   {
@@ -27,11 +27,19 @@ const eventSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    status: {
+      type: String,
+      enum: ["draft", "published"],
+      default: "draft",
+    },
     banner: {
       type: String,
+      default: "",
     },
   },
   { timestamps: true },
 );
 
-export const Events = mongoose.model("events", eventSchema);
+export type Event = InferSchemaType<typeof eventSchema>;
+
+export const Event = mongoose.model<Event>("events", eventSchema);
