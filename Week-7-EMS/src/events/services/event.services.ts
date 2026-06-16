@@ -2,13 +2,25 @@ import { AppError } from "../../utils/AppError";
 import { Event } from "../model/event.model";
 import { eventSchema, eventDto } from "../schema/event.schema";
 
-export async function fetchEvent(id: string) {
-  const event = await Event.findById(id);
+export async function fetchPublishedEvent(id: string) {
+  const event = await Event.findOne({ _id: id, status: "published" });
+  return event;
+}
+export async function fetchDraftEvent(id: string) {
+  const event = await Event.findOne({ _id: id, status: "draft" });
+  return event;
+}
+export async function fetchDraftEvents() {
+  const event = await Event.find({ status: "draft" });
   return event;
 }
 
-export async function fetchEvents() {
-  const events = await Event.find({}).select({ password: 0 });
+export async function fetchAllEvents() {
+  const events = await Event.find({});
+  return events;
+}
+export async function fetchPublishedEvents() {
+  const events = await Event.find({ status: "published" });
   return events;
 }
 
@@ -18,4 +30,25 @@ export async function postEvent(event: eventDto) {
   const newEvent = new Event(event);
   const result = await newEvent.save();
   return result;
+}
+
+export async function publishEvent(id: string) {
+  const publisheddEvent = await Event.findByIdAndUpdate(id, {
+    status: "published",
+  });
+  return publisheddEvent;
+}
+
+export async function updateEvent(id: string, newData: eventDto) {
+  const updatedEvent = await Event.findOneAndReplace({ _id: id }, newData, {
+    new: true,
+    runValidators: true,
+  });
+
+  return updatedEvent;
+}
+
+export async function deleteEvent(id: string) {
+  const deletedEvent = await Event.findByIdAndDelete(id);
+  return deletedEvent;
 }
