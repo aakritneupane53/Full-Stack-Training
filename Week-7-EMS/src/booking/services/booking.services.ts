@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 import Booking from "../model/booking.model";
 import { AppError } from "../../utils/AppError";
-import { fetchPublishedEvent } from "../../events/services/event.services";
+import { Event } from "../../events/model/event.model";
 
 type bookingType = {
   userId: string;
@@ -11,34 +11,49 @@ type bookingType = {
 };
 
 export async function createBooking({ userId, eventId, seats }: bookingType) {
-  //fetch the event
-  const event = await fetchPublishedEvent(eventId);
-  if (!event)
-    throw new AppError(
-      "No such event exists, please do provide correct event Id",
-      400,
+  const session = await mongoose.startSession();
+
+  try {
+    session.startTransaction();
+
+    // check for the existing booking
+    const existingBooking = await Booking.findOne({ eventId, userId }).session(
+      session,
     );
-  console.log(event);
-  //check if the seats being booked<= available seats
-  const availableSeats = event.capacity - event.bookedSeats;
-  if (seats > availableSeats)
-    throw new AppError(
-      `Seats exceed the available seat count:${availableSeats}`,
-      400,
+    if (existingBooking)
+      throw new AppError("The booking for the event already exists", 409);
+
+    // atomic update seat count to handle the race condition
+    const updatedEvent = await Event.findOneAndUpdate(
+      {
+        _id: eventId,
+        status: "published",
+        // date:{$gt:new Date()},
+        $expr: {
+          $lte: [{ $add: ["$bookedSeats", seats] }, "$capacity"],
+        },
+      },
+      {
+        $incr: { bookedSeats: seats },
+      },
+      { new: true, session },
     );
 
-  // check if the booking with same set of userId and eventId doesn't exist
-  const existsEvent = await Booking.findOne({
-    eventId: eventId,
-    userId: userId,
-  });
-  if (existsEvent)
-    throw new AppError("User has already booked for the given event", 401);
+    if (!updatedEvent)
+      throw new AppError("Failed to update event or unavailable seats", 400);
 
-  // create a new Bookign
-  const newBooking = await Booking.create({ userId, eventId, seats });
-  if (!newBooking)
-    throw new AppError("Something went wrong while creating new Booking", 500);
+    // create a new Booking
+    const newBooking = await Booking.create(
+      { eventId, userId, seats },
+      { session },
+    );
 
-  return newBooking;
+    await session.commitTransaction();
+    return newBooking;
+  } catch (err) {
+    session.abortTransaction();
+    throw err;
+  } finally {
+    session.endSession();
+  }
 }
