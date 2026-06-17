@@ -42,4 +42,4 @@ const eventSchema = new mongoose.Schema(
 
 export type Event = InferSchemaType<typeof eventSchema>;
 
-export const Event = mongoose.model<Event>("events", eventSchema);
+export const Event = mongoose.model<Event>("Event", eventSchema);
