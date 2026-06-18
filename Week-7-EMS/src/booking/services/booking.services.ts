@@ -58,10 +58,10 @@ export async function createBooking({ userId, eventId, seats }: bookingType) {
     await session.commitTransaction();
     return newBooking;
   } catch (err) {
-    session.abortTransaction();
+    await session.abortTransaction();
     throw err;
   } finally {
-    session.endSession();
+    await session.endSession();
   }
 }
 
@@ -99,14 +99,14 @@ export async function deleteBookingById(bookingId: string, userId: string) {
     if (!eventUpdated)
       throw new AppError("Could not updated the event bookedseats", 500);
 
-    session.commitTransaction();
+    await session.commitTransaction();
 
     return booking;
   } catch (error) {
-    session.abortTransaction();
+    await session.abortTransaction();
     throw error;
   } finally {
-    session.endSession();
+    await session.endSession();
   }
 }
 

@@ -40,7 +40,13 @@ export async function deleteBooking(
     const { id } = req.params as { id: string };
     const { id: userId } = req.user;
     const deletedBooking = await deleteBookingById(id, userId);
-    return deletedBooking;
+    return res
+      .json(200)
+      .json({
+        success: true,
+        message: "Booking deleted successfully",
+        data: deletedBooking,
+      });
   } catch (error) {
     next(error);
   }
