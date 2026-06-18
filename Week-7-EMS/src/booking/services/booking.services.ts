@@ -64,3 +64,23 @@ export async function createBooking({ userId, eventId, seats }: bookingType) {
     session.endSession();
   }
 }
+
+export async function getUserBooking(userId: string) {
+  const bookings = await Booking.find({ userId });
+  return bookings;
+}
+
+export async function deleteBooking(bookingId: string) {
+  const deletedBooking = await Booking.deleteOne({ _id: bookingId });
+}
+
+// admin authorized services
+export async function fetchBookings() {
+  const bookings = await Booking.find();
+  return bookings;
+}
+
+export async function fetchBookingsForEvent(eventId: string) {
+  const bookings = await Booking.find({ eventId });
+  return bookings;
+}

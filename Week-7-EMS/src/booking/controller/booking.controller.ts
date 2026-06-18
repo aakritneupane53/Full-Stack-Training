@@ -10,9 +10,7 @@ export async function bookingHandler(
 ) {
   try {
     const { id: userId } = req.user;
-    if (!userId) throw new AppError("No userId provided", 400);
     const { eventId } = req.params as { eventId: string };
-    if (!eventId) throw new AppError("No eventId provided", 400);
     const { seats } = (req.body as { seats: number }) || 1;
     console.log({ userId, eventId, seats });
     const newBooking = await createBooking({ userId, eventId, seats });
