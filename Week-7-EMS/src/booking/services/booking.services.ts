@@ -70,8 +70,44 @@ export async function getUserBooking(userId: string) {
   return bookings;
 }
 
-export async function deleteBooking(bookingId: string) {
-  const deletedBooking = await Booking.deleteOne({ _id: bookingId });
+export async function deleteBookingById(bookingId: string, userId: string) {
+  const session = await mongoose.startSession();
+  try {
+    session.startTransaction();
+
+    // first delete the booking
+
+    const booking = await Booking.findOneAndDelete(
+      { _id: bookingId, userId },
+      { session },
+    );
+    if (!booking)
+      throw new AppError(
+        "No such booking exist, or unauthorized access ,invalid booking ID",
+        400,
+      );
+
+    // now decrement the bookedSeats in the event from booking.seats
+    const eventUpdated = await Event.findByIdAndUpdate(
+      booking.eventId,
+      {
+        $inc: { bookedSeats: -booking.seats },
+      },
+      { returnDocument: "after", session },
+    );
+
+    if (!eventUpdated)
+      throw new AppError("Could not updated the event bookedseats", 500);
+
+    session.commitTransaction();
+
+    return booking;
+  } catch (error) {
+    session.abortTransaction();
+    throw error;
+  } finally {
+    session.endSession();
+  }
 }
 
 // admin authorized services

@@ -1,6 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 
-import { createBooking } from "../services/booking.services";
+import {
+  createBooking,
+  getUserBooking,
+  deleteBookingById,
+  fetchBookings,
+  fetchBookingsForEvent,
+} from "../services/booking.services";
 import { AppError } from "../../utils/AppError";
 
 export async function bookingHandler(
@@ -21,6 +27,21 @@ export async function bookingHandler(
     });
   } catch (error) {
     console.log("error in create booking handler", error);
+    next(error);
+  }
+}
+
+export async function deleteBooking(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  try {
+    const { id } = req.params as { id: string };
+    const { id: userId } = req.user;
+    const deletedBooking = await deleteBookingById(id, userId);
+    return deletedBooking;
+  } catch (error) {
     next(error);
   }
 }

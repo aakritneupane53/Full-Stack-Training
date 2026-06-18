@@ -7,5 +7,6 @@ import { bookingHandler } from "../controller/booking.controller";
 const router = express.Router();
 
 router.post("/event/:eventId", bookingHandler);
+router.delete("/:id", bookingHandler);
 
 export default router;
