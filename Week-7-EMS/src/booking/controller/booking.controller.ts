@@ -8,6 +8,7 @@ import {
   fetchBookingsForEvent,
 } from "../services/booking.services";
 import { AppError } from "../../utils/AppError";
+import { success } from "zod";
 
 export async function bookingHandler(
   req: Request,
@@ -40,14 +41,28 @@ export async function deleteBooking(
     const { id } = req.params as { id: string };
     const { id: userId } = req.user;
     const deletedBooking = await deleteBookingById(id, userId);
-    return res
-      .json(200)
-      .json({
-        success: true,
-        message: "Booking deleted successfully",
-        data: deletedBooking,
-      });
+    return res.json(200).json({
+      success: true,
+      message: "Booking deleted successfully",
+      data: deletedBooking,
+    });
   } catch (error) {
+    console.log("Error in delete booking controller", error);
+    next(error);
+  }
+}
+
+export async function getUserBookings(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  try {
+    const { id: userId }: { id: string } = req.user;
+    const bookings = await getUserBooking(userId);
+    return res.status(200).json({ success: true, data: bookings });
+  } catch (error) {
+    console.log("Error in getUsers booking controller", error);
     next(error);
   }
 }
