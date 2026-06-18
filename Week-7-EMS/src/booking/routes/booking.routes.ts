@@ -11,6 +11,7 @@ import {
 const router = express.Router();
 
 router.get("/me", getUserBookings);
+router.get("/admin/bookings", RoleAuthorize("admin"), getUserBookings);
 router.delete("/:id", deleteBooking);
 router.post("/event/:eventId", bookingHandler);
 

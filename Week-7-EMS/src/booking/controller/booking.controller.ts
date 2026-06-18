@@ -66,3 +66,19 @@ export async function getUserBookings(
     next(error);
   }
 }
+
+// admin functionalities
+
+export async function fetchAllBookings(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  try {
+    const bookings = await fetchBookings();
+    return res.status(200).json({ success: true, data: bookings });
+  } catch (error) {
+    console.log("Error in getUsers booking controller", error);
+    next(error);
+  }
+}
