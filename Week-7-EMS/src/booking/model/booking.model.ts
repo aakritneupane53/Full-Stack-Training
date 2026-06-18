@@ -21,6 +21,6 @@ const bookingSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export type Booking = InferSchemaType<typeof bookingSchema>;
+type Booking = InferSchemaType<typeof bookingSchema>;
 
 export const Booking = mongoose.model<Booking>("Booking", bookingSchema);

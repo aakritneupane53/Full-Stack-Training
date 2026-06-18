@@ -2,11 +2,12 @@ import express, { Request, Response, NextFunction } from "express";
 import cookieParser from "cookie-parser";
 
 import redis from "./config/redis";
-import errorHandler from "./middleware/error.middleware";
+import { AppError } from "./utils/AppError";
 import authRoutes from "./auth/routes/auth.routes";
 import adminRoutes from "./admin/routes/admin.routes";
 import eventRoutes from "./events/routes/event.routes";
-import { AppError } from "./utils/AppError";
+import bookingRoutes from "./booking/routes/booking.routes";
+import errorHandler from "./middleware/error.middleware";
 import authorize from "./middleware/authorize.middleware";
 import RoleAuthorize from "./middleware/roleaccess.middleware";
 
@@ -18,6 +19,7 @@ app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", authorize, RoleAuthorize("admin"), adminRoutes);
 app.use("/api/events", authorize, eventRoutes);
+app.use("/api/booking", authorize, bookingRoutes);
 
 app.get("/health", (_req: Request, res: Response) => {
   return res.status(200).json({ message: "Server is running just fine" });
