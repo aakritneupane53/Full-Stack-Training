@@ -42,7 +42,7 @@ export async function createBooking({ userId, eventId, seats }: bookingType) {
         },
       },
       {
-        $incr: { bookedSeats: seats },
+        $inc: { bookedSeats: seats },
       },
       { returnDocument: "after", session },
     );
