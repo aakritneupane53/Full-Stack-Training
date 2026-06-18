@@ -112,7 +112,7 @@ export async function deleteBookingById(bookingId: string, userId: string) {
 
 // admin authorized services
 export async function fetchBookings() {
-  const bookings = await Booking.find();
+  const bookings = await Booking.find({});
   return bookings;
 }
 

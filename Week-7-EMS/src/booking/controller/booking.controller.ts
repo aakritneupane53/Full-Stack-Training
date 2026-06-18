@@ -79,6 +79,22 @@ export async function fetchAllBookings(
     return res.status(200).json({ success: true, data: bookings });
   } catch (error) {
     console.log("Error in getUsers booking controller", error);
+    console.log(error);
+    next(error);
+  }
+}
+export async function fetchBookingsOfEvent(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  try {
+    const { eventId } = req.params as { eventId: string };
+    const bookings = await fetchBookingsForEvent(eventId);
+    return res.status(200).json({ success: true, data: bookings });
+  } catch (error) {
+    console.log("Error in getUsers booking controller", error);
+    console.log(error);
     next(error);
   }
 }
